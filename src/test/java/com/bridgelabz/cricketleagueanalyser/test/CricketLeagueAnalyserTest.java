@@ -51,4 +51,22 @@ public class CricketLeagueAnalyserTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void givenIPLCSV_WhenSortedOnSixAndFour_ShouldReturnTopCricketerSixAndFour() {
+        CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+        try {
+            cricketLeagueAnalyser.loadFactsSheetCSV(FACT_SHEET_MOST_RUNS_CSV_FILE_PATH);
+            String sortedSix = cricketLeagueAnalyser.getSortedSix();
+            String sortedFour = cricketLeagueAnalyser.getSortedFour();
+            MostRunsCSV[] sixCSV = new Gson().fromJson(sortedSix, MostRunsCSV[].class);
+            MostRunsCSV[] fourCSV = new Gson().fromJson(sortedFour, MostRunsCSV[].class);
+            Assert.assertEquals(52, sixCSV[sixCSV.length-1].six,0.0);
+            Assert.assertEquals("Andre Russell", sixCSV[sixCSV.length-1].player);
+            Assert.assertEquals(64,fourCSV[fourCSV.length-1].fours);
+            Assert.assertEquals("Shikhar Dhawan",fourCSV[fourCSV.length-1].player);
+        } catch (CricketLeagueException e) {
+            e.printStackTrace();
+        }
+    }
 }

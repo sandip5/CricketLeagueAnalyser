@@ -49,5 +49,21 @@ public class CricketLeagueAnalyser {
         String sortedStrikeRateJSON = new Gson().toJson(iplList);
         return sortedStrikeRateJSON;
     }
+
+    public String getSortedSix() {
+        Comparator<MostRunsCSV> iplComparator = Comparator.comparing(census -> census.six);
+        iplList.sort(iplComparator);
+        System.out.println(iplList);
+        String sortedSixJSON = new Gson().toJson(iplList);
+        return sortedSixJSON;
+    }
+
+    public String getSortedFour() {
+        Comparator<MostRunsCSV> iplComparator = Comparator.comparing(census -> census.fours);
+        iplList.sort(iplComparator);
+        System.out.println(iplList);
+        String sortedFourJSON = new Gson().toJson(iplList);
+        return sortedFourJSON;
+    }
 }
 
