@@ -159,4 +159,18 @@ public class CricketLeagueAnalyserTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void givenIPLCSV_WhenSortedOnBowlingStrikeRate_ShouldReturnTopCricketer() {
+        CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+        try {
+            cricketLeagueAnalyser.loadWicketFactsSheetCSV(FACT_SHEET_MOST_WICKETS_CSV_FILE_PATH);
+            String sortedBowlingStrikeRate = cricketLeagueAnalyser.getSortedBowlingStrikeRate();
+            MostWicketsCSV[] mostBowlCSV = new Gson().fromJson(sortedBowlingStrikeRate, MostWicketsCSV[].class);
+            Assert.assertEquals(120.0, mostBowlCSV[mostBowlCSV.length-1].strikeRate,0.0);
+            Assert.assertEquals("Krishnappa Gowtham", mostBowlCSV[mostBowlCSV.length-1].player);
+        } catch (CricketLeagueException e) {
+            e.printStackTrace();
+        }
+    }
 }
