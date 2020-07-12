@@ -69,4 +69,53 @@ public class CricketLeagueAnalyserTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void givenIPLCSV_WhenSortedOnSixAndFour_ShouldReturnTopCricketerStrikeRate() {
+        CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+        try {
+            cricketLeagueAnalyser.loadFactsSheetCSV(FACT_SHEET_MOST_RUNS_CSV_FILE_PATH);
+            String sortedSix = cricketLeagueAnalyser.getSortedSix();
+            String sortedFour = cricketLeagueAnalyser.getSortedFour();
+            MostRunsCSV[] sixCSV = new Gson().fromJson(sortedSix, MostRunsCSV[].class);
+            MostRunsCSV[] fourCSV = new Gson().fromJson(sortedFour, MostRunsCSV[].class);
+            Assert.assertEquals(204.81, sixCSV[sixCSV.length-1].strikeRate,0.0);
+            Assert.assertEquals("Andre Russell", sixCSV[sixCSV.length-1].player);
+            Assert.assertEquals(135.67,fourCSV[fourCSV.length-1].strikeRate,0.0);
+            Assert.assertEquals("Shikhar Dhawan",fourCSV[fourCSV.length-1].player);
+        } catch (CricketLeagueException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenIPLCSV_WhenSortedOnStrikingRate_ShouldReturnTopCricketerStrikingRateWithSixFour() {
+        CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+        try {
+            cricketLeagueAnalyser.loadFactsSheetCSV(FACT_SHEET_MOST_RUNS_CSV_FILE_PATH);
+            String sortedStrikeRate = cricketLeagueAnalyser.getSortedStrikeRate();
+            MostRunsCSV[] mostRunsCSVS = new Gson().fromJson(sortedStrikeRate, MostRunsCSV[].class);
+            Assert.assertEquals(333.33, mostRunsCSVS[mostRunsCSVS.length-1].strikeRate,0.0);
+            Assert.assertEquals("Ishant Sharma",mostRunsCSVS[mostRunsCSVS.length-1].player);
+            Assert.assertEquals(1,mostRunsCSVS[mostRunsCSVS.length-1].six);
+            Assert.assertEquals(1,mostRunsCSVS[mostRunsCSVS.length-1].fours);
+        } catch (CricketLeagueException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenIPLCSV_WhenSortedOnAverage_ShouldReturnTopCricketerAverageWithStrikingRate() {
+        CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+        try {
+            cricketLeagueAnalyser.loadFactsSheetCSV(FACT_SHEET_MOST_RUNS_CSV_FILE_PATH);
+            String sortedBattingAverage = cricketLeagueAnalyser.getSortedBattingAverage();
+            MostRunsCSV[] mostRunsCSVS = new Gson().fromJson(sortedBattingAverage, MostRunsCSV[].class);
+            Assert.assertEquals(83.2, mostRunsCSVS[mostRunsCSVS.length-1].avg,0.0);
+            Assert.assertEquals("MS Dhoni", mostRunsCSVS[mostRunsCSVS.length-1].player);
+            Assert.assertEquals(134.62, mostRunsCSVS[mostRunsCSVS.length-1].strikeRate,0.0);
+        } catch (CricketLeagueException e) {
+            e.printStackTrace();
+        }
+    }
 }
