@@ -30,8 +30,8 @@ public class CricketLeagueAnalyserTest {
         try {
             cricketLeagueAnalyser.loadFactsSheetCSV(FACT_SHEET_MOST_RUNS_CSV_FILE_PATH);
             String sortedBattingAverage = cricketLeagueAnalyser.getSortedBattingAverage();
-            MostRunsCSV[] indiaCensusCSV = new Gson().fromJson(sortedBattingAverage, MostRunsCSV[].class);
-            Assert.assertEquals(69.2, indiaCensusCSV[0].avg);
+            MostRunsCSV[] mostRunsCSVS = new Gson().fromJson(sortedBattingAverage, MostRunsCSV[].class);
+            Assert.assertEquals(83.2, mostRunsCSVS[mostRunsCSVS.length-1].avg,0.0);
         } catch (CricketLeagueException e) {
             e.printStackTrace();
         }

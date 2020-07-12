@@ -19,7 +19,7 @@ public class MostRunsCSV {
     public String highScore;
 
     @CsvBindByName(column = "Avg")
-    public String avg;
+    public double avg;
 
     @CsvBindByName(column = "SR")
     public String strikeRate;
