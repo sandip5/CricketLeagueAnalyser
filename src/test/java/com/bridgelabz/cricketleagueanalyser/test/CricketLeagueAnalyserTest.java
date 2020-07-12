@@ -118,4 +118,19 @@ public class CricketLeagueAnalyserTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void givenIPLCSV_WhenSortedOnRuns_ShouldReturnTopCricketerRunsWithAverage() {
+        CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+        try {
+            cricketLeagueAnalyser.loadFactsSheetCSV(FACT_SHEET_MOST_RUNS_CSV_FILE_PATH);
+            String sortedRun = cricketLeagueAnalyser.getSortedRuns();
+            MostRunsCSV[] mostRunsCSVS = new Gson().fromJson(sortedRun, MostRunsCSV[].class);
+            Assert.assertEquals(692, mostRunsCSVS[mostRunsCSVS.length-1].run);
+            Assert.assertEquals("David Warner", mostRunsCSVS[mostRunsCSVS.length-1].player);
+            Assert.assertEquals(69.2, mostRunsCSVS[mostRunsCSVS.length-1].avg,0.0);
+        } catch (CricketLeagueException e) {
+            e.printStackTrace();
+        }
+    }
 }
