@@ -256,4 +256,18 @@ public class CricketLeagueAnalyserTest {
         }
     }
 
+    @Test
+    public void givenIPLCSV_WhenSortedOnHundred_ShouldReturnTopCricketerBattingAverage() {
+        CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+        try {
+            cricketLeagueAnalyser.loadRunFactsSheetCSV(FACT_SHEET_MOST_RUNS_CSV_FILE_PATH);
+            String sortedHundred = cricketLeagueAnalyser.getSortedHundred();
+            MostRunsCSV[] mostRunsCSVS = new Gson().fromJson(sortedHundred, MostRunsCSV[].class);
+            Assert.assertEquals(1, mostRunsCSVS[mostRunsCSVS.length-1].hundred);
+            Assert.assertEquals("Sanju Samson", mostRunsCSVS[mostRunsCSVS.length-1].player);
+        } catch (CricketLeagueException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

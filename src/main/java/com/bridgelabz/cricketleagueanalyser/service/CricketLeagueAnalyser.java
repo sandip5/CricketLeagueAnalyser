@@ -126,5 +126,13 @@ public class CricketLeagueAnalyser {
         String sortedBowlingEconomyJSON = new Gson().toJson(iplListMostWickets);
         return sortedBowlingEconomyJSON;
     }
+
+    public String getSortedHundred() {
+        Comparator<MostRunsCSV> iplComparator = Comparator.comparing(census -> census.hundred);
+        iplListMostRun.sort(iplComparator);
+        System.out.println(iplListMostRun);
+        String sortedHundred = new Gson().toJson(iplListMostRun);
+        return sortedHundred;
+    }
 }
 
