@@ -32,6 +32,21 @@ public class CricketLeagueAnalyserTest {
             String sortedBattingAverage = cricketLeagueAnalyser.getSortedBattingAverage();
             MostRunsCSV[] mostRunsCSVS = new Gson().fromJson(sortedBattingAverage, MostRunsCSV[].class);
             Assert.assertEquals(83.2, mostRunsCSVS[mostRunsCSVS.length-1].avg,0.0);
+            Assert.assertEquals("MS Dhoni", mostRunsCSVS[mostRunsCSVS.length-1].player);
+        } catch (CricketLeagueException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenIPLCSV_WhenSortedOnStrikingRate_ShouldReturnTopCricketerStrikingRate() {
+        CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+        try {
+            cricketLeagueAnalyser.loadFactsSheetCSV(FACT_SHEET_MOST_RUNS_CSV_FILE_PATH);
+            String sortedStrikeRate = cricketLeagueAnalyser.getSortedStrikeRate();
+            MostRunsCSV[] mostRunsCSVS = new Gson().fromJson(sortedStrikeRate, MostRunsCSV[].class);
+            Assert.assertEquals(333.33, mostRunsCSVS[mostRunsCSVS.length-1].strikeRate,0.0);
+            Assert.assertEquals("Ishant Sharma",mostRunsCSVS[mostRunsCSVS.length-1].player);
         } catch (CricketLeagueException e) {
             e.printStackTrace();
         }

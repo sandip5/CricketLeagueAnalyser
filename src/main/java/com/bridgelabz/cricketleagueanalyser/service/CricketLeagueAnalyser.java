@@ -38,9 +38,16 @@ public class CricketLeagueAnalyser {
         Comparator<MostRunsCSV> iplComparator = Comparator.comparing(census -> census.avg);
         iplList.sort(iplComparator);
         System.out.println(iplList);
-        String sorteBattingAvgJSON = new Gson().toJson(iplList);
-        return sorteBattingAvgJSON;
+        String sortedBattingAvgJSON = new Gson().toJson(iplList);
+        return sortedBattingAvgJSON;
     }
 
+    public String getSortedStrikeRate() {
+        Comparator<MostRunsCSV> iplComparator = Comparator.comparing(census -> census.strikeRate);
+        iplList.sort(iplComparator);
+        System.out.println(iplList);
+        String sortedStrikeRateJSON = new Gson().toJson(iplList);
+        return sortedStrikeRateJSON;
+    }
 }
 
