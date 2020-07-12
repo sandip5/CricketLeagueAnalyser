@@ -94,5 +94,13 @@ public class CricketLeagueAnalyser {
         String sortedFourJSON = new Gson().toJson(iplListMostRun);
         return sortedFourJSON;
     }
+
+    public String getSortedBowlingAverage() {
+        Comparator<MostWicketsCSV> iplComparator = Comparator.comparing(census -> census.average);
+        iplListMostWickets.sort(iplComparator);
+        System.out.println(iplListMostWickets);
+        String sortedBowlingAverageJSON = new Gson().toJson(iplListMostWickets);
+        return sortedBowlingAverageJSON;
+    }
 }
 

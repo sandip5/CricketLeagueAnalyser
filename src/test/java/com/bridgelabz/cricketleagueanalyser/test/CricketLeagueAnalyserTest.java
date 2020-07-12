@@ -2,6 +2,7 @@ package com.bridgelabz.cricketleagueanalyser.test;
 
 import com.bridgelabz.cricketleagueanalyser.exception.CricketLeagueException;
 import com.bridgelabz.cricketleagueanalyser.models.MostRunsCSV;
+import com.bridgelabz.cricketleagueanalyser.models.MostWicketsCSV;
 import com.bridgelabz.cricketleagueanalyser.service.CricketLeagueAnalyser;
 import com.google.gson.Gson;
 import org.junit.Assert;
@@ -131,6 +132,29 @@ public class CricketLeagueAnalyserTest {
             Assert.assertEquals(692, mostRunsCSVS[mostRunsCSVS.length-1].run);
             Assert.assertEquals("David Warner", mostRunsCSVS[mostRunsCSVS.length-1].player);
             Assert.assertEquals(69.2, mostRunsCSVS[mostRunsCSVS.length-1].avg,0.0);
+        } catch (CricketLeagueException e) {
+            e.printStackTrace();
+        }
+    }
+    @Test
+    public void givenIPLCSVWicketFile_ReturnsCorrectRecords() {
+        try {
+            CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+            List numOfRecords = cricketLeagueAnalyser.loadWicketFactsSheetCSV(FACT_SHEET_MOST_WICKETS_CSV_FILE_PATH);
+            Assert.assertEquals(101, numOfRecords.size());
+        } catch (CricketLeagueException e) {
+            e.printStackTrace();
+        }
+    }
+    @Test
+    public void givenIPLCSV_WhenSortedOnBowlingAverage_ShouldReturnTopCricketer() {
+        CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+        try {
+            cricketLeagueAnalyser.loadWicketFactsSheetCSV(FACT_SHEET_MOST_WICKETS_CSV_FILE_PATH);
+            String sortedBowlingAverage = cricketLeagueAnalyser.getSortedBowlingAverage();
+            MostWicketsCSV[] mostBowlCSV = new Gson().fromJson(sortedBowlingAverage, MostWicketsCSV[].class);
+            Assert.assertEquals(166.0, mostBowlCSV[mostBowlCSV.length-1].average,0.0);
+            Assert.assertEquals("Krishnappa Gowtham", mostBowlCSV[mostBowlCSV.length-1].player);
         } catch (CricketLeagueException e) {
             e.printStackTrace();
         }
