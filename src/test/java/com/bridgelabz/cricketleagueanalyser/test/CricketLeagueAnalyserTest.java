@@ -173,4 +173,18 @@ public class CricketLeagueAnalyserTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void givenIPLCSV_WhenSortedOnBowlingEconomy_ShouldReturnTopCricketer() {
+        CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+        try {
+            cricketLeagueAnalyser.loadWicketFactsSheetCSV(FACT_SHEET_MOST_WICKETS_CSV_FILE_PATH);
+            String sortedBowlingEconomy = cricketLeagueAnalyser.getSortedBowlingEconomy();
+            MostWicketsCSV[] mostBowlCSV = new Gson().fromJson(sortedBowlingEconomy, MostWicketsCSV[].class);
+            Assert.assertEquals(12.0, mostBowlCSV[mostBowlCSV.length-1].strikeRate,0.0);
+            Assert.assertEquals("Ben Cutting", mostBowlCSV[mostBowlCSV.length-1].player);
+        } catch (CricketLeagueException e) {
+            e.printStackTrace();
+        }
+    }
 }
