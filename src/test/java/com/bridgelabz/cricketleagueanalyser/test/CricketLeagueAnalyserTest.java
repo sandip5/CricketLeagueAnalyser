@@ -187,4 +187,38 @@ public class CricketLeagueAnalyserTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void givenIPLCSV_WhenSortedOnBowlingStrikeRate_ShouldReturnTopCricketerWith5W4W() {
+        CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+        try {
+            cricketLeagueAnalyser.loadWicketFactsSheetCSV(FACT_SHEET_MOST_WICKETS_CSV_FILE_PATH);
+            String sortedBowlingStrikeRate = cricketLeagueAnalyser.getSortedBowlingStrikeRate();
+            MostWicketsCSV[] mostBowlCSV = new Gson().fromJson(sortedBowlingStrikeRate, MostWicketsCSV[].class);
+            Assert.assertEquals(120.0, mostBowlCSV[mostBowlCSV.length-1].strikeRate,0.0);
+            Assert.assertEquals("Krishnappa Gowtham", mostBowlCSV[mostBowlCSV.length-1].player);
+            Assert.assertEquals(0, mostBowlCSV[mostBowlCSV.length-1].fourWkts);
+            Assert.assertEquals(0, mostBowlCSV[mostBowlCSV.length-1].fiveWkts);
+        } catch (CricketLeagueException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenIPLCSV_WhenSortedOnBowlingAverage_ShouldReturnTopCricketerWithBestStrikeRate() {
+        CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+        try {
+            cricketLeagueAnalyser.loadWicketFactsSheetCSV(FACT_SHEET_MOST_WICKETS_CSV_FILE_PATH);
+            String sortedBowlingAverage = cricketLeagueAnalyser.getSortedBowlingAverage();
+            String sortedBowlingStrikeRate = cricketLeagueAnalyser.getSortedBowlingStrikeRate();
+            MostWicketsCSV[] mostBowlAvgCSV = new Gson().fromJson(sortedBowlingAverage, MostWicketsCSV[].class);
+            MostWicketsCSV[] mostBowlStrikeRateCSV = new Gson().fromJson(sortedBowlingStrikeRate, MostWicketsCSV[].class);
+            Assert.assertEquals(120.0, mostBowlAvgCSV[mostBowlAvgCSV.length-1].strikeRate,0.0);
+            Assert.assertEquals("Krishnappa Gowtham", mostBowlAvgCSV[mostBowlAvgCSV.length-1].player);
+            Assert.assertEquals(120.0, mostBowlStrikeRateCSV[mostBowlStrikeRateCSV.length-1].strikeRate,0.0);
+            Assert.assertEquals("Krishnappa Gowtham", mostBowlStrikeRateCSV[mostBowlStrikeRateCSV.length-1].player);
+        } catch (CricketLeagueException e) {
+            e.printStackTrace();
+        }
+    }
 }
