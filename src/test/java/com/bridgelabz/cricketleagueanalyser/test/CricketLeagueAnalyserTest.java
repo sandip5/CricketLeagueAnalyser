@@ -19,7 +19,7 @@ public class CricketLeagueAnalyserTest {
     public void givenIPLCSVFile_ReturnsCorrectRecords() {
         try {
             CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
-            List numOfRecords = cricketLeagueAnalyser.loadFactsSheetCSV(FACT_SHEET_MOST_RUNS_CSV_FILE_PATH);
+            List numOfRecords = cricketLeagueAnalyser.loadRunFactsSheetCSV(FACT_SHEET_MOST_RUNS_CSV_FILE_PATH);
             Assert.assertEquals(101, numOfRecords.size());
         } catch (CricketLeagueException e) {
             e.printStackTrace();
@@ -30,7 +30,7 @@ public class CricketLeagueAnalyserTest {
     public void givenIPLCSV_WhenSortedOnBattingAverage_ShouldReturnTopCricketerBattingAverage() {
         CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
         try {
-            cricketLeagueAnalyser.loadFactsSheetCSV(FACT_SHEET_MOST_RUNS_CSV_FILE_PATH);
+            cricketLeagueAnalyser.loadRunFactsSheetCSV(FACT_SHEET_MOST_RUNS_CSV_FILE_PATH);
             String sortedBattingAverage = cricketLeagueAnalyser.getSortedBattingAverage();
             MostRunsCSV[] mostRunsCSVS = new Gson().fromJson(sortedBattingAverage, MostRunsCSV[].class);
             Assert.assertEquals(83.2, mostRunsCSVS[mostRunsCSVS.length-1].avg,0.0);
@@ -44,7 +44,7 @@ public class CricketLeagueAnalyserTest {
     public void givenIPLCSV_WhenSortedOnStrikingRate_ShouldReturnTopCricketerStrikingRate() {
         CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
         try {
-            cricketLeagueAnalyser.loadFactsSheetCSV(FACT_SHEET_MOST_RUNS_CSV_FILE_PATH);
+            cricketLeagueAnalyser.loadRunFactsSheetCSV(FACT_SHEET_MOST_RUNS_CSV_FILE_PATH);
             String sortedStrikeRate = cricketLeagueAnalyser.getSortedStrikeRate();
             MostRunsCSV[] mostRunsCSVS = new Gson().fromJson(sortedStrikeRate, MostRunsCSV[].class);
             Assert.assertEquals(333.33, mostRunsCSVS[mostRunsCSVS.length-1].strikeRate,0.0);
@@ -58,7 +58,7 @@ public class CricketLeagueAnalyserTest {
     public void givenIPLCSV_WhenSortedOnSixAndFour_ShouldReturnTopCricketerSixAndFour() {
         CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
         try {
-            cricketLeagueAnalyser.loadFactsSheetCSV(FACT_SHEET_MOST_RUNS_CSV_FILE_PATH);
+            cricketLeagueAnalyser.loadRunFactsSheetCSV(FACT_SHEET_MOST_RUNS_CSV_FILE_PATH);
             String sortedSix = cricketLeagueAnalyser.getSortedSix();
             String sortedFour = cricketLeagueAnalyser.getSortedFour();
             MostRunsCSV[] sixCSV = new Gson().fromJson(sortedSix, MostRunsCSV[].class);
@@ -76,7 +76,7 @@ public class CricketLeagueAnalyserTest {
     public void givenIPLCSV_WhenSortedOnSixAndFour_ShouldReturnTopCricketerStrikeRate() {
         CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
         try {
-            cricketLeagueAnalyser.loadFactsSheetCSV(FACT_SHEET_MOST_RUNS_CSV_FILE_PATH);
+            cricketLeagueAnalyser.loadRunFactsSheetCSV(FACT_SHEET_MOST_RUNS_CSV_FILE_PATH);
             String sortedSix = cricketLeagueAnalyser.getSortedSix();
             String sortedFour = cricketLeagueAnalyser.getSortedFour();
             MostRunsCSV[] sixCSV = new Gson().fromJson(sortedSix, MostRunsCSV[].class);
@@ -94,7 +94,7 @@ public class CricketLeagueAnalyserTest {
     public void givenIPLCSV_WhenSortedOnStrikingRate_ShouldReturnTopCricketerStrikingRateWithSixFour() {
         CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
         try {
-            cricketLeagueAnalyser.loadFactsSheetCSV(FACT_SHEET_MOST_RUNS_CSV_FILE_PATH);
+            cricketLeagueAnalyser.loadRunFactsSheetCSV(FACT_SHEET_MOST_RUNS_CSV_FILE_PATH);
             String sortedStrikeRate = cricketLeagueAnalyser.getSortedStrikeRate();
             MostRunsCSV[] mostRunsCSVS = new Gson().fromJson(sortedStrikeRate, MostRunsCSV[].class);
             Assert.assertEquals(333.33, mostRunsCSVS[mostRunsCSVS.length-1].strikeRate,0.0);
@@ -110,7 +110,7 @@ public class CricketLeagueAnalyserTest {
     public void givenIPLCSV_WhenSortedOnAverage_ShouldReturnTopCricketerAverageWithStrikingRate() {
         CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
         try {
-            cricketLeagueAnalyser.loadFactsSheetCSV(FACT_SHEET_MOST_RUNS_CSV_FILE_PATH);
+            cricketLeagueAnalyser.loadRunFactsSheetCSV(FACT_SHEET_MOST_RUNS_CSV_FILE_PATH);
             String sortedBattingAverage = cricketLeagueAnalyser.getSortedBattingAverage();
             MostRunsCSV[] mostRunsCSVS = new Gson().fromJson(sortedBattingAverage, MostRunsCSV[].class);
             Assert.assertEquals(83.2, mostRunsCSVS[mostRunsCSVS.length-1].avg,0.0);
@@ -125,7 +125,7 @@ public class CricketLeagueAnalyserTest {
     public void givenIPLCSV_WhenSortedOnRuns_ShouldReturnTopCricketerRunsWithAverage() {
         CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
         try {
-            cricketLeagueAnalyser.loadFactsSheetCSV(FACT_SHEET_MOST_RUNS_CSV_FILE_PATH);
+            cricketLeagueAnalyser.loadRunFactsSheetCSV(FACT_SHEET_MOST_RUNS_CSV_FILE_PATH);
             String sortedRun = cricketLeagueAnalyser.getSortedRuns();
             MostRunsCSV[] mostRunsCSVS = new Gson().fromJson(sortedRun, MostRunsCSV[].class);
             Assert.assertEquals(692, mostRunsCSVS[mostRunsCSVS.length-1].run);
