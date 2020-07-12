@@ -236,4 +236,24 @@ public class CricketLeagueAnalyserTest {
         }
     }
 
+
+    @Test
+    public void givenIPLCSV_WhenSortedOnBattingAverageAndBallingAverage_ShouldReturnTopCricketerName() {
+        CricketLeagueAnalyser cricketLeagueAnalyser = new CricketLeagueAnalyser();
+        try {
+            cricketLeagueAnalyser.loadRunFactsSheetCSV(FACT_SHEET_MOST_RUNS_CSV_FILE_PATH);
+            String sortedBattingAverage = cricketLeagueAnalyser.getSortedBattingAverage();
+            MostRunsCSV[] mostRunsCSVS = new Gson().fromJson(sortedBattingAverage, MostRunsCSV[].class);
+            Assert.assertEquals(83.2, mostRunsCSVS[mostRunsCSVS.length-1].avg,0.0);
+            Assert.assertEquals("MS Dhoni", mostRunsCSVS[mostRunsCSVS.length-1].player);
+            cricketLeagueAnalyser.loadWicketFactsSheetCSV(FACT_SHEET_MOST_WICKETS_CSV_FILE_PATH);
+            String sortedBowlingAverage = cricketLeagueAnalyser.getSortedBowlingAverage();
+            MostWicketsCSV[] mostBowlCSV = new Gson().fromJson(sortedBowlingAverage, MostWicketsCSV[].class);
+            Assert.assertEquals(166.0, mostBowlCSV[mostBowlCSV.length-1].average,0.0);
+            Assert.assertEquals("Krishnappa Gowtham", mostBowlCSV[mostBowlCSV.length-1].player);
+        } catch (CricketLeagueException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
