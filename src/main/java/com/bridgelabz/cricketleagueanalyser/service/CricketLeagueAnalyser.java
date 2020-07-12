@@ -15,13 +15,13 @@ import java.util.Comparator;
 import java.util.List;
 
 public class CricketLeagueAnalyser {
-    List<MostRunsCSV> iplList;
+    List<MostRunsCSV> iplListMostRun;
 
     public List loadFactsSheetCSV(String csvFilePath) throws CricketLeagueException {
         try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
-            iplList = csvBuilder.getCSVFileList(reader, MostRunsCSV.class);
-            return iplList;
+            iplListMostRun = csvBuilder.getCSVFileList(reader, MostRunsCSV.class);
+            return iplListMostRun;
         } catch (RuntimeException e) {
             throw new CricketLeagueException("Delimiter Or Header Problem",
                     CricketLeagueException.ExceptionType.DELIMITER_AND_HEADER_PROBLEM);
@@ -36,41 +36,41 @@ public class CricketLeagueAnalyser {
 
     public String getSortedBattingAverage() {
         Comparator<MostRunsCSV> iplComparator = Comparator.comparing(census -> census.avg);
-        iplList.sort(iplComparator);
-        System.out.println(iplList);
-        String sortedBattingAvgJSON = new Gson().toJson(iplList);
+        iplListMostRun.sort(iplComparator);
+        System.out.println(iplListMostRun);
+        String sortedBattingAvgJSON = new Gson().toJson(iplListMostRun);
         return sortedBattingAvgJSON;
     }
 
     public String getSortedStrikeRate() {
         Comparator<MostRunsCSV> iplComparator = Comparator.comparing(census -> census.strikeRate);
-        iplList.sort(iplComparator);
-        System.out.println(iplList);
-        String sortedStrikeRateJSON = new Gson().toJson(iplList);
+        iplListMostRun.sort(iplComparator);
+        System.out.println(iplListMostRun);
+        String sortedStrikeRateJSON = new Gson().toJson(iplListMostRun);
         return sortedStrikeRateJSON;
     }
 
     public String getSortedSix() {
         Comparator<MostRunsCSV> iplComparator = Comparator.comparing(census -> census.six);
-        iplList.sort(iplComparator);
-        System.out.println(iplList);
-        String sortedSixJSON = new Gson().toJson(iplList);
+        iplListMostRun.sort(iplComparator);
+        System.out.println(iplListMostRun);
+        String sortedSixJSON = new Gson().toJson(iplListMostRun);
         return sortedSixJSON;
     }
 
     public String getSortedFour() {
         Comparator<MostRunsCSV> iplComparator = Comparator.comparing(census -> census.fours);
-        iplList.sort(iplComparator);
-        System.out.println(iplList);
-        String sortedFourJSON = new Gson().toJson(iplList);
+        iplListMostRun.sort(iplComparator);
+        System.out.println(iplListMostRun);
+        String sortedFourJSON = new Gson().toJson(iplListMostRun);
         return sortedFourJSON;
     }
 
     public String getSortedRuns() {
         Comparator<MostRunsCSV> iplComparator = Comparator.comparing(census -> census.run);
-        iplList.sort(iplComparator);
-        System.out.println(iplList);
-        String sortedFourJSON = new Gson().toJson(iplList);
+        iplListMostRun.sort(iplComparator);
+        System.out.println(iplListMostRun);
+        String sortedFourJSON = new Gson().toJson(iplListMostRun);
         return sortedFourJSON;
     }
 }
