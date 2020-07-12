@@ -12,6 +12,8 @@ import java.util.List;
 public class CricketLeagueAnalyserTest {
     String FACT_SHEET_MOST_RUNS_CSV_FILE_PATH =
             "./src/test/resources/Day16 Data_01 IPL2019FactsheetMostRuns.csv";
+    String FACT_SHEET_MOST_WICKETS_CSV_FILE_PATH =
+            "./src/test/resources/Day16 Data_02 IPL2019FactsheetMostWkts.csv";
 
     @Test
     public void givenIPLCSVFile_ReturnsCorrectRecords() {
